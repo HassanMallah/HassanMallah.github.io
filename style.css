@@ -1,0 +1,11 @@
+body {
+  height: 100vh;
+  background-image: linear-gradient(to top left , #000000, #090424);
+}
+*{
+color: white;
+font-weight: 700;
+}
+h3{
+font-weight: 600;
+}
