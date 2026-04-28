@@ -1,54 +1,1064 @@
 <!DOCTYPE html>
 <html lang="en">
 <head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/ionicons/5.5.2/css/ionicons.min.css">
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+  <title>Hassan Mallah — Java Developer</title>
 
+  <!-- Bootstrap 5 -->
+  <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/css/bootstrap.min.css" rel="stylesheet"/>
+  <!-- Bootstrap Icons -->
+  <link href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.11.3/font/bootstrap-icons.min.css" rel="stylesheet"/>
+  <!-- Google Fonts -->
+  <link href="https://fonts.googleapis.com/css2?family=JetBrains+Mono:wght@400;600;700&family=Syne:wght@400;600;700;800&display=swap" rel="stylesheet"/>
 
-    <link rel="stylesheet" href="style.css">
+  <style>
+    /* ── RESET & ROOT ─────────────────────────────── */
+    :root {
+      --bg:       #0a0d12;
+      --surface:  #111520;
+      --card:     #161b27;
+      --border:   #1f2840;
+      --accent:   #00e5ff;
+      --accent2:  #7c3aed;
+      --green:    #00ff88;
+      --text:     #e2e8f0;
+      --muted:    #64748b;
+      --font-mono: 'JetBrains Mono', monospace;
+      --font-sans: 'Syne', sans-serif;
+    }
 
-    <title>Portfolio</title>
+    *, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
+
+    html { scroll-behavior: smooth; }
+
+    body {
+      background: var(--bg);
+      color: var(--text);
+      font-family: var(--font-sans);
+      overflow-x: hidden;
+    }
+
+    .font-mono { font-family: var(--font-mono); }
+
+    /* ── SCROLLBAR ─────────────────────────────────── */
+    ::-webkit-scrollbar { width: 4px; }
+    ::-webkit-scrollbar-track { background: var(--bg); }
+    ::-webkit-scrollbar-thumb { background: var(--accent2); border-radius: 4px; }
+
+    /* ── BOOT SCREEN ───────────────────────────────── */
+    #boot-screen {
+      position: fixed;
+      inset: 0;
+      background: #000;
+      z-index: 9999;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      padding: 2rem;
+    }
+
+    #boot-terminal {
+      width: 100%;
+      max-width: 700px;
+      font-family: var(--font-mono);
+      font-size: clamp(0.7rem, 2vw, 0.9rem);
+      color: var(--green);
+    }
+
+    #boot-terminal .prompt { color: var(--accent); }
+    #boot-terminal .dim    { color: var(--muted); }
+    #boot-terminal .hi     { color: var(--accent); }
+    #boot-cursor {
+      display: inline-block;
+      width: 10px; height: 1.1em;
+      background: var(--green);
+      vertical-align: middle;
+      animation: blink .7s step-end infinite;
+    }
+    @keyframes blink { 50% { opacity: 0; } }
+
+    /* ── NAVBAR ────────────────────────────────────── */
+    #main-nav {
+      position: fixed; top: 0; left: 0; right: 0;
+      z-index: 1000;
+      background: rgba(10,13,18,.85);
+      backdrop-filter: blur(14px);
+      border-bottom: 1px solid var(--border);
+      padding: .9rem 0;
+      transform: translateY(-100%);
+      transition: transform .5s ease;
+    }
+    #main-nav.visible { transform: translateY(0); }
+
+    .nav-brand {
+      font-family: var(--font-mono);
+      font-weight: 700;
+      font-size: 1.1rem;
+      color: var(--accent) !important;
+      text-decoration: none;
+    }
+    .nav-brand span { color: var(--green); }
+
+    .nav-link {
+      color: var(--muted) !important;
+      font-family: var(--font-mono);
+      font-size: .8rem;
+      letter-spacing: .05em;
+      transition: color .2s;
+      padding: .4rem .8rem !important;
+    }
+    .nav-link:hover { color: var(--accent) !important; }
+
+    .hire-btn {
+      background: var(--accent);
+      color: #000 !important;
+      font-weight: 700;
+      border-radius: 4px;
+      padding: .4rem 1.1rem !important;
+      transition: background .2s, transform .15s;
+    }
+    .hire-btn:hover { background: var(--green); transform: translateY(-1px); }
+
+    /* ── HERO ──────────────────────────────────────── */
+    #hero {
+      min-height: 100vh;
+      display: flex;
+      align-items: center;
+      position: relative;
+      overflow: hidden;
+      padding-top: 80px;
+    }
+
+    .hero-grid-bg {
+      position: absolute; inset: 0;
+      background-image:
+        linear-gradient(var(--border) 1px, transparent 1px),
+        linear-gradient(90deg, var(--border) 1px, transparent 1px);
+      background-size: 50px 50px;
+      opacity: .35;
+    }
+
+    .hero-glow {
+      position: absolute;
+      width: 600px; height: 600px;
+      border-radius: 50%;
+      background: radial-gradient(circle, rgba(0,229,255,.08) 0%, transparent 70%);
+      top: 50%; left: 50%;
+      transform: translate(-50%, -50%);
+      pointer-events: none;
+    }
+
+    .hero-tag {
+      display: inline-block;
+      font-family: var(--font-mono);
+      font-size: .75rem;
+      color: var(--green);
+      border: 1px solid var(--green);
+      border-radius: 4px;
+      padding: .25rem .75rem;
+      margin-bottom: 1.5rem;
+      letter-spacing: .08em;
+    }
+
+    .hero-name {
+      font-size: clamp(3rem, 8vw, 6rem);
+      font-weight: 800;
+      line-height: 1;
+      letter-spacing: -.03em;
+      margin-bottom: 1rem;
+    }
+
+    .hero-name .accent { color: var(--accent); }
+
+    .hero-role {
+      font-family: var(--font-mono);
+      font-size: clamp(.9rem, 2.5vw, 1.1rem);
+      color: var(--muted);
+      margin-bottom: 1.5rem;
+    }
+    .hero-role .typing { color: var(--accent); }
+
+    .hero-desc {
+      max-width: 520px;
+      color: #94a3b8;
+      font-size: 1rem;
+      line-height: 1.7;
+      margin-bottom: 2rem;
+    }
+
+    .hero-actions { display: flex; gap: 1rem; flex-wrap: wrap; }
+
+    .btn-primary-custom {
+      background: var(--accent);
+      color: #000;
+      font-weight: 700;
+      font-family: var(--font-mono);
+      font-size: .85rem;
+      padding: .75rem 1.75rem;
+      border: none;
+      border-radius: 4px;
+      cursor: pointer;
+      text-decoration: none;
+      transition: background .2s, transform .15s;
+      display: inline-flex; align-items: center; gap: .5rem;
+    }
+    .btn-primary-custom:hover { background: var(--green); transform: translateY(-2px); }
+
+    .btn-ghost {
+      background: transparent;
+      color: var(--text);
+      font-weight: 600;
+      font-family: var(--font-mono);
+      font-size: .85rem;
+      padding: .75rem 1.75rem;
+      border: 1px solid var(--border);
+      border-radius: 4px;
+      cursor: pointer;
+      text-decoration: none;
+      transition: border-color .2s, color .2s;
+      display: inline-flex; align-items: center; gap: .5rem;
+    }
+    .btn-ghost:hover { border-color: var(--accent); color: var(--accent); }
+
+    .hero-stats {
+      display: flex; gap: 2.5rem; flex-wrap: wrap;
+      margin-top: 3rem;
+      padding-top: 2rem;
+      border-top: 1px solid var(--border);
+    }
+    .stat-item { }
+    .stat-num {
+      font-size: 2rem;
+      font-weight: 800;
+      color: var(--accent);
+      font-family: var(--font-mono);
+      line-height: 1;
+    }
+    .stat-label { font-size: .8rem; color: var(--muted); margin-top: .2rem; }
+
+    /* ── LIVE TICKER ───────────────────────────────── */
+    #ticker {
+      background: var(--surface);
+      border-top: 1px solid var(--border);
+      border-bottom: 1px solid var(--border);
+      overflow: hidden;
+      padding: .65rem 0;
+    }
+    .ticker-track {
+      display: flex;
+      gap: 0;
+      white-space: nowrap;
+      animation: ticker-scroll 30s linear infinite;
+    }
+    .ticker-item {
+      font-family: var(--font-mono);
+      font-size: .78rem;
+      color: var(--muted);
+      padding: 0 2.5rem;
+      display: inline-flex;
+      align-items: center;
+      gap: .6rem;
+    }
+    .ticker-item .dot {
+      width: 6px; height: 6px;
+      border-radius: 50%;
+      background: var(--green);
+      display: inline-block;
+      animation: pulse 1.5s ease infinite;
+    }
+    .ticker-item .label { color: var(--text); }
+    @keyframes ticker-scroll {
+      0% { transform: translateX(0); }
+      100% { transform: translateX(-50%); }
+    }
+    @keyframes pulse {
+      0%,100% { opacity: 1; transform: scale(1); }
+      50% { opacity: .4; transform: scale(.7); }
+    }
+
+    /* ── SECTION COMMON ────────────────────────────── */
+    section { padding: 6rem 0; }
+
+    .section-label {
+      font-family: var(--font-mono);
+      font-size: .75rem;
+      color: var(--accent);
+      letter-spacing: .12em;
+      text-transform: uppercase;
+      margin-bottom: .75rem;
+    }
+    .section-title {
+      font-size: clamp(2rem, 5vw, 2.8rem);
+      font-weight: 800;
+      letter-spacing: -.02em;
+      margin-bottom: 1rem;
+    }
+    .section-title .accent { color: var(--accent); }
+    .section-sub {
+      color: var(--muted);
+      max-width: 480px;
+      line-height: 1.6;
+      margin-bottom: 3rem;
+    }
+
+    /* ── ABOUT ─────────────────────────────────────── */
+    #about { background: var(--surface); }
+
+    .about-card {
+      background: var(--card);
+      border: 1px solid var(--border);
+      border-radius: 12px;
+      padding: 2rem;
+      height: 100%;
+    }
+
+    .about-avatar {
+      width: 90px; height: 90px;
+      border-radius: 50%;
+      background: linear-gradient(135deg, var(--accent2), var(--accent));
+      display: flex; align-items: center; justify-content: center;
+      font-size: 2.2rem;
+      font-weight: 800;
+      color: #fff;
+      margin-bottom: 1.5rem;
+      font-family: var(--font-mono);
+    }
+
+    .info-row {
+      display: flex; justify-content: space-between;
+      border-bottom: 1px solid var(--border);
+      padding: .6rem 0;
+      font-size: .88rem;
+    }
+    .info-row:last-child { border-bottom: none; }
+    .info-key { color: var(--muted); font-family: var(--font-mono); }
+    .info-val { color: var(--text); font-weight: 600; }
+
+    .goal-badge {
+      display: inline-flex;
+      align-items: center;
+      gap: .4rem;
+      background: rgba(124,58,237,.15);
+      border: 1px solid rgba(124,58,237,.4);
+      border-radius: 6px;
+      padding: .5rem 1rem;
+      font-size: .82rem;
+      font-family: var(--font-mono);
+      color: #a78bfa;
+      margin-top: 1rem;
+    }
+
+    /* ── SKILLS ────────────────────────────────────── */
+    #skills { background: var(--bg); }
+
+    .skill-card {
+      background: var(--card);
+      border: 1px solid var(--border);
+      border-radius: 10px;
+      padding: 1.25rem;
+      display: flex;
+      align-items: center;
+      gap: 1rem;
+      transition: border-color .25s, transform .2s;
+      cursor: default;
+    }
+    .skill-card:hover { border-color: var(--accent); transform: translateY(-3px); }
+
+    .skill-icon {
+      width: 46px; height: 46px;
+      border-radius: 8px;
+      display: flex; align-items: center; justify-content: center;
+      font-size: 1.4rem;
+      flex-shrink: 0;
+    }
+
+    .skill-name { font-weight: 700; font-size: .92rem; }
+    .skill-level {
+      font-family: var(--font-mono);
+      font-size: .72rem;
+      color: var(--muted);
+      margin-top: .15rem;
+    }
+
+    .skill-bar-wrap {
+      height: 4px;
+      background: var(--border);
+      border-radius: 2px;
+      margin-top: .5rem;
+      overflow: hidden;
+    }
+    .skill-bar {
+      height: 100%;
+      border-radius: 2px;
+      background: linear-gradient(90deg, var(--accent2), var(--accent));
+      width: 0;
+      transition: width 1.2s ease;
+    }
+
+    /* ── PROJECTS ──────────────────────────────────── */
+    #projects { background: var(--surface); }
+
+    .project-card {
+      background: var(--card);
+      border: 1px solid var(--border);
+      border-radius: 14px;
+      padding: 2rem;
+      height: 100%;
+      position: relative;
+      overflow: hidden;
+      transition: border-color .25s, transform .2s;
+    }
+    .project-card::before {
+      content: '';
+      position: absolute;
+      top: 0; left: 0; right: 0;
+      height: 3px;
+    }
+    .project-card.c1::before { background: linear-gradient(90deg, var(--accent), var(--accent2)); }
+    .project-card.c2::before { background: linear-gradient(90deg, var(--green), var(--accent)); }
+    .project-card.c3::before { background: linear-gradient(90deg, var(--accent2), #ec4899); }
+
+    .project-card:hover { border-color: var(--accent); transform: translateY(-4px); }
+
+    .project-tag {
+      display: inline-block;
+      font-family: var(--font-mono);
+      font-size: .7rem;
+      border-radius: 4px;
+      padding: .15rem .6rem;
+      margin-right: .4rem;
+      margin-bottom: .4rem;
+    }
+    .tag-java   { background: rgba(0,229,255,.1); color: var(--accent); border: 1px solid rgba(0,229,255,.25); }
+    .tag-spring { background: rgba(0,255,136,.1); color: var(--green); border: 1px solid rgba(0,255,136,.25); }
+    .tag-node   { background: rgba(124,58,237,.1); color: #a78bfa; border: 1px solid rgba(124,58,237,.25); }
+    .tag-db     { background: rgba(251,191,36,.1); color: #fbbf24; border: 1px solid rgba(251,191,36,.25); }
+    .tag-html   { background: rgba(249,115,22,.1); color: #fb923c; border: 1px solid rgba(249,115,22,.25); }
+
+    .project-title { font-size: 1.2rem; font-weight: 700; margin: 1rem 0 .5rem; }
+    .project-desc { font-size: .88rem; color: #94a3b8; line-height: 1.6; margin-bottom: 1.25rem; }
+
+    .project-status {
+      display: inline-flex;
+      align-items: center;
+      gap: .4rem;
+      font-family: var(--font-mono);
+      font-size: .72rem;
+    }
+    .status-dot {
+      width: 7px; height: 7px;
+      border-radius: 50%;
+    }
+    .status-active { background: var(--green); animation: pulse 1.5s infinite; }
+    .status-done   { background: var(--accent); }
+
+    /* ── TEACHING ──────────────────────────────────── */
+    #teaching { background: var(--bg); }
+
+    .teaching-card {
+      background: var(--card);
+      border: 1px solid var(--border);
+      border-radius: 14px;
+      padding: 2.5rem;
+      position: relative;
+      overflow: hidden;
+    }
+    .teaching-card::after {
+      content: '</>';
+      position: absolute;
+      right: 2rem; top: 50%;
+      transform: translateY(-50%);
+      font-size: 6rem;
+      font-family: var(--font-mono);
+      font-weight: 800;
+      color: rgba(0,229,255,.05);
+      pointer-events: none;
+    }
+    .teaching-badge {
+      background: linear-gradient(135deg, var(--accent2), var(--accent));
+      color: #fff;
+      border-radius: 6px;
+      padding: .35rem .9rem;
+      font-family: var(--font-mono);
+      font-size: .75rem;
+      font-weight: 600;
+      display: inline-block;
+      margin-bottom: 1.25rem;
+    }
+    .curriculum-item {
+      display: flex;
+      align-items: center;
+      gap: .75rem;
+      padding: .6rem 0;
+      border-bottom: 1px solid var(--border);
+      font-size: .88rem;
+    }
+    .curriculum-item:last-child { border-bottom: none; }
+    .curr-num {
+      font-family: var(--font-mono);
+      font-size: .72rem;
+      color: var(--accent);
+      width: 24px;
+      flex-shrink: 0;
+    }
+    .curr-done { color: var(--green); }
+    .curr-pending { color: var(--muted); }
+
+    /* ── CONTACT ───────────────────────────────────── */
+    #contact { background: var(--surface); }
+
+    .contact-card {
+      background: var(--card);
+      border: 1px solid var(--border);
+      border-radius: 14px;
+      padding: 2rem;
+      display: flex;
+      align-items: center;
+      gap: 1.25rem;
+      text-decoration: none;
+      color: var(--text);
+      transition: border-color .25s, transform .2s;
+    }
+    .contact-card:hover { border-color: var(--accent); transform: translateY(-3px); color: var(--text); }
+
+    .contact-icon {
+      width: 52px; height: 52px;
+      border-radius: 10px;
+      display: flex; align-items: center; justify-content: center;
+      font-size: 1.4rem;
+      flex-shrink: 0;
+    }
+
+    .contact-label { font-size: .75rem; color: var(--muted); font-family: var(--font-mono); }
+    .contact-val   { font-weight: 700; font-size: .95rem; margin-top: .1rem; }
+
+    .open-badge {
+      background: rgba(0,255,136,.1);
+      border: 1px solid rgba(0,255,136,.3);
+      border-radius: 50px;
+      padding: .4rem 1.2rem;
+      font-family: var(--font-mono);
+      font-size: .78rem;
+      color: var(--green);
+      display: inline-flex;
+      align-items: center;
+      gap: .5rem;
+    }
+    .open-dot {
+      width: 7px; height: 7px;
+      border-radius: 50%;
+      background: var(--green);
+      animation: pulse 1.5s infinite;
+    }
+
+    /* ── FOOTER ────────────────────────────────────── */
+    footer {
+      background: var(--bg);
+      border-top: 1px solid var(--border);
+      padding: 2rem 0;
+      text-align: center;
+      font-family: var(--font-mono);
+      font-size: .78rem;
+      color: var(--muted);
+    }
+    footer span { color: var(--accent); }
+
+    /* ── FADE-IN ANIMATION ─────────────────────────── */
+    .fade-up {
+      opacity: 0;
+      transform: translateY(30px);
+      transition: opacity .7s ease, transform .7s ease;
+    }
+    .fade-up.visible {
+      opacity: 1;
+      transform: translateY(0);
+    }
+
+    /* ── FROM B: card hover glow ───────────────────── */
+    .card-hover-glow { transition: all .25s ease; }
+    .card-hover-glow:hover { box-shadow: 0 0 0 1px rgba(0,229,255,.4), 0 8px 32px rgba(0,229,255,.08) !important; transform: translateY(-3px); }
+
+    /* ── FROM B: github cell pulse ──────────────────── */
+    @keyframes ghPulse { 0%,100%{opacity:.15} 50%{opacity:.4} }
+    .gh-cell { animation: ghPulse 2.2s ease infinite; }
+    .gh-cell:nth-child(3n) { animation-delay: .3s; }
+    .gh-cell:nth-child(5n) { animation-delay: .65s; }
+    .gh-cell:nth-child(7n) { animation-delay: .95s; }
+
+    /* ── MOBILE ────────────────────────────────────── */
+    @media (max-width: 768px) {
+      .hero-stats { gap: 1.5rem; }
+      section { padding: 4rem 0; }
+    }
+  </style>
 </head>
 <body>
-<div class="container">
-    <h1>Hassan Mallah</h1>
-    <p>Undergraduate Computer Science Student | Java Developer | Web Enthusiast | Digital Marketing</p>
 
-    <div class="section">
-        <h2>About Me</h2>
-        <p>I'm a CS student at Sindh University with a passion for programming and exploring new technologies. I enjoy working with Java, HTML, CSS, and databases.</p>
-    </div>
-
-    <div class="section">
-        <h2>Skills</h2>
-        <ul>
-            <li>Java (Core, OOP, Servlets)</li>
-            <li>HTML & CSS</li>
-            <li>JavaScript & Nodejs</li>
-            <li>Git & GitHub</li>
-            <li>Oracle Database</li>
-            <li>Bootstrap</li>
-            <li>Digital Marketing</li>
-        </ul>
-    </div>
-
-    <div class="section">
-        <h2><a href="maintenance.html" target="_blank"><span>Click Here </span>Projects</a></h2>
-        <ul>
-            <li>A project to digitize family business record (Ongoing)</li>
-        </ul>
-    </div>
-
-    <div class="section contact">
-        <h2><a href="contact.html" target="_blank"><span>Click Here </span>Contact Me</a></h2>
-        <p> <ion-icon name="mail"></ion-icon> Email: hassanmallah02@gmail.com</p>
-        <p> <ion-icon name="logo-github"></ion-icon> GitHub: <a href="https://github.com/HassanMallah" target="_blank">Hassan Mallah</a></p>
-        <p> <ion-icon name="logo-linkedin"></ion-icon> Linkdin: <a href="https://www.linkedin.com/in/hassanmallah/" target="_blank">Hassan Mallah</a></p>
-    </div>
+<!-- ═══════════════════════════════ BOOT SCREEN ═══ -->
+<div id="boot-screen">
+  <div id="boot-terminal">
+    <div id="boot-lines"></div>
+    <span id="boot-cursor"></span>
+  </div>
 </div>
-<script type="module" src="https://unpkg.com/ionicons@5.5.2/dist/ionicons/ionicons.esm.js"></script>
-<script nomodule src="https://unpkg.com/ionicons@5.5.2/dist/ionicons/ionicons.js"></script>
 
+<!-- ═══════════════════════════════ NAVBAR ══════════ -->
+<nav id="main-nav">
+  <div class="container d-flex align-items-center justify-content-between">
+    <a href="#hero" class="nav-brand">hassan<span>.dev</span></a>
+    <div class="d-none d-md-flex align-items-center gap-1">
+      <a href="#about"    class="nav-link">about</a>
+      <a href="#skills"   class="nav-link">skills</a>
+      <a href="#projects" class="nav-link">projects</a>
+      <a href="#teaching" class="nav-link">teaching</a>
+      <a href="#github"   class="nav-link">github</a>
+      <a href="#contact"  class="nav-link">contact</a>
+      <a href="mailto:hassanmallah02@gmail.com" class="nav-link hire-btn ms-2">hire me</a>
+    </div>
+    <!-- mobile hamburger -->
+    <button class="navbar-toggler d-md-none border-0" type="button" data-bs-toggle="collapse" data-bs-target="#mobileMenu" style="color:var(--text)">
+      <i class="bi bi-list fs-4"></i>
+    </button>
+  </div>
+  <div class="collapse" id="mobileMenu">
+    <div class="container pb-2 d-flex flex-column gap-1">
+      <a href="#about"    class="nav-link">about</a>
+      <a href="#skills"   class="nav-link">skills</a>
+      <a href="#projects" class="nav-link">projects</a>
+      <a href="#teaching" class="nav-link">teaching</a>
+      <a href="#github"   class="nav-link">github</a>
+      <a href="#contact"  class="nav-link">contact</a>
+      <a href="mailto:hassanmallah02@gmail.com" class="nav-link hire-btn" style="max-width:120px;">hire me</a>
+    </div>
+  </div>
+</nav>
+
+<!-- ═══════════════════════════════ HERO ════════════ -->
+<section id="hero">
+  <div class="hero-grid-bg"></div>
+  <div class="hero-glow"></div>
+  <div class="container position-relative">
+    <div class="row align-items-center">
+      <div class="col-lg-8">
+        <div class="hero-tag fade-up">⚡ available for work</div>
+        <h1 class="hero-name fade-up">
+          Hassan<br><span class="accent">Mallah.</span>
+        </h1>
+        <div class="hero-role fade-up">
+          <span class="typing" id="typing-role"></span><span id="typing-cursor">|</span>
+        </div>
+        <p class="hero-desc fade-up">
+          CS undergraduate at Sindh University building production-grade Java & Spring Boot systems. 
+          I teach, I ship, and I'm targeting <strong style="color:var(--accent)">international opportunities</strong>.
+        </p>
+        <div class="hero-actions fade-up">
+          <a href="#projects" class="btn-primary-custom">
+            <i class="bi bi-grid-3x3-gap-fill"></i> View Projects
+          </a>
+          <a href="mailto:hassanmallah02@gmail.com" class="btn-ghost">
+            <i class="bi bi-send"></i> Get in Touch
+          </a>
+        </div>
+        <div class="hero-stats fade-up">
+          <div class="stat-item">
+            <div class="stat-num">5<span style="color:var(--green)">th</span></div>
+            <div class="stat-label">Semester CS</div>
+          </div>
+          <div class="stat-item">
+            <div class="stat-num">3<span style="color:var(--green)">+</span></div>
+            <div class="stat-label">Active Projects</div>
+          </div>
+          <div class="stat-item">
+            <div class="stat-num">20<span style="color:var(--green)">+</span></div>
+            <div class="stat-label">Students Taught</div>
+          </div>
+          <div class="stat-item">
+            <div class="stat-num">🌍</div>
+            <div class="stat-label">international</div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- ═══════════════════════════════ LIVE TICKER ═════ -->
+<div id="ticker">
+  <div class="ticker-track" id="tickerTrack"></div>
+</div>
+
+<!-- ═══════════════════════════════ ABOUT ═══════════ -->
+<section id="about">
+  <div class="container">
+    <div class="row g-4 align-items-start">
+      <div class="col-lg-6 fade-up">
+        <div class="section-label">// about</div>
+        <h2 class="section-title">Who Am <span class="accent">I?</span></h2>
+        <p class="section-sub">
+          I don't just study CS — I build real systems, teach others, and contribute to 
+          production backends. My stack is Java + Spring Boot, and I'm serious about going global.
+        </p>
+        <div class="about-card">
+          <div class="about-avatar">HM</div>
+          <div>
+            <div class="info-row"><span class="info-key">university</span><span class="info-val">Sindh University, Hyderabad</span></div>
+            <div class="info-row"><span class="info-key">semester</span><span class="info-val">5th — Computer Science</span></div>
+            <div class="info-row"><span class="info-key">location</span><span class="info-val">Hyderabad, Sindh, Pakistan</span></div>
+            <div class="info-row"><span class="info-key">primary stack</span><span class="info-val">Java · Spring Boot · PostgreSQL</span></div>
+            <div class="info-row"><span class="info-key">secondary</span><span class="info-val">Node.js · HTML/CSS · Bootstrap</span></div>
+            <div class="info-row"><span class="info-key">tools</span><span class="info-val">IntelliJ · Git · Maven · Linear</span></div>
+            <div class="info-row"><span class="info-key">email</span><span class="info-val">hassanmallah02@gmail.com</span></div>
+          </div>
+          <div class="goal-badge">
+            <i class="bi bi-airplane-fill"></i> Targeting World — Master's or Direct Job
+          </div>
+        </div>
+      </div>
+      <div class="col-lg-6 fade-up">
+        <div class="row g-3 mt-lg-5">
+          <div class="col-6">
+            <div class="about-card text-center">
+              <div style="font-size:2.5rem; margin-bottom:.75rem;">🏗️</div>
+              <div style="font-weight:700; margin-bottom:.4rem;">Builder Mindset</div>
+              <div style="font-size:.82rem; color:var(--muted);">3 active projects in parallel — never just studying theory</div>
+            </div>
+          </div>
+          <div class="col-6">
+            <div class="about-card text-center">
+              <div style="font-size:2.5rem; margin-bottom:.75rem;">🎓</div>
+              <div style="font-weight:700; margin-bottom:.4rem;">Teaching Others</div>
+              <div style="font-size:.82rem; color:var(--muted);">Running Sindh Uni Notes — Java to Spring Boot curriculum</div>
+            </div>
+          </div>
+          <div class="col-6">
+            <div class="about-card text-center">
+              <div style="font-size:2.5rem; margin-bottom:.75rem;">🤝</div>
+              <div style="font-weight:700; margin-bottom:.4rem;">Team Player</div>
+              <div style="font-size:.82rem; color:var(--muted);">Collaborating on khaato-backend with family team</div>
+            </div>
+          </div>
+          <div class="col-6">
+            <div class="about-card text-center">
+              <div style="font-size:2.5rem; margin-bottom:.75rem;">🌍</div>
+              <div style="font-weight:700; margin-bottom:.4rem;">Global Vision</div>
+              <div style="font-size:.82rem; color:var(--muted);">Aiming for international career</div>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- ═══════════════════════════════ SKILLS ══════════ -->
+<section id="skills">
+  <div class="container">
+    <div class="section-label fade-up">//  skills</div>
+    <h2 class="section-title fade-up">Tech <span class="accent">Stack</span></h2>
+    <p class="section-sub fade-up">The tools I actually use in production — not just a list of buzzwords.</p>
+
+    <div class="row g-3" id="skills-grid"></div>
+  </div>
+</section>
+
+<!-- ═══════════════════════════════ PROJECTS ════════ -->
+<section id="projects">
+  <div class="container">
+    <div class="section-label fade-up">// projects</div>
+    <h2 class="section-title fade-up">What I've <span class="accent">Built</span></h2>
+    <p class="section-sub fade-up">Real systems, real problems, real code — not just tutorial clones.</p>
+
+    <div class="row g-4">
+
+      <div class="col-md-6 col-lg-4 fade-up">
+        <div class="project-card c1">
+          <div>
+            <span class="project-tag tag-java">Java</span>
+            <span class="project-tag tag-spring">Spring Boot</span>
+            <span class="project-tag tag-db">PostgreSQL</span>
+          </div>
+          <div class="project-title">khaato-backend</div>
+          <div class="project-desc">
+            Microservices backend built with Spring Boot. Contributing as a team collaborator
+            alongside my uncle and cousins — real production codebase with Maven, IntelliJ, and PostgreSQL.
+          </div>
+          <div class="d-flex align-items-center justify-content-between">
+            <div class="project-status">
+              <span class="status-dot status-active"></span>
+              <span style="color:var(--green)">Active Development</span>
+            </div>
+            <a href="https://github.com/HassanMallah" target="_blank" class="btn-ghost" style="padding:.35rem .85rem; font-size:.75rem;">
+              <i class="bi bi-github"></i> GitHub
+            </a>
+          </div>
+        </div>
+      </div>
+
+      <div class="col-md-6 col-lg-4 fade-up">
+        <div class="project-card c2">
+          <div>
+            <span class="project-tag tag-java">Java/Spring</span>
+            <span class="project-tag tag-db">PostgreSQL</span>
+            <span class="project-tag tag-html">HTML/CSS</span>
+          </div>
+          <div class="project-title">Sindh-Uni-Notes</div>
+          <div class="project-desc">
+            Digitizing university knowledge into a fully structured notes platform. Covers Java, Spring Boot, 
+            and backend development — taught to real junior students at Sindh University.
+          </div>
+          <div class="d-flex align-items-center justify-content-between">
+            <div class="project-status">
+              <span class="status-dot status-active"></span>
+              <span style="color:var(--green)">In Progress</span>
+            </div>
+            <a href="https://github.com/HassanMallah" target="_blank" class="btn-ghost" style="padding:.35rem .85rem; font-size:.75rem;">
+              <i class="bi bi-github"></i> GitHub
+            </a>
+          </div>
+        </div>
+      </div>
+
+      <div class="col-md-6 col-lg-4 fade-up">
+        <div class="project-card c3">
+          <div>
+            <span class="project-tag tag-node">Node.js</span>
+            <span class="project-tag tag-db">MySql</span>
+            <span class="project-tag tag-html">REST API</span>
+          </div>
+          <div class="project-title">Doctor Appointment Booking</div>
+          <div class="project-desc">
+            A full-stack appointment booking system built with Node.js. Covers patient 
+            management, doctor scheduling, and appointment tracking with a complete REST API.
+          </div>
+          <div class="d-flex align-items-center justify-content-between">
+            <div class="project-status">
+              <span class="status-dot status-done"></span>
+              <span style="color:var(--accent)">Completed</span>
+            </div>
+            <a href="https://github.com/HassanMallah" target="_blank" class="btn-ghost" style="padding:.35rem .85rem; font-size:.75rem;">
+              <i class="bi bi-github"></i> GitHub
+            </a>
+          </div>
+        </div>
+      </div>
+
+    </div>
+  </div>
+</section>
+
+<!-- ═══════════════════════════════ TEACHING ════════ -->
+<section id="teaching">
+  <div class="container">
+    <div class="section-label fade-up">// teaching</div>
+    <h2 class="section-title fade-up">Sindh Uni <span class="accent">Notes</span></h2>
+    <p class="section-sub fade-up">
+      I run an in-person teaching initiative for junior CS students at Sindh University. 
+      If you can teach it, you truly understand it.
+    </p>
+
+    <div class="row g-4 align-items-start">
+      <div class="col-lg-7 fade-up">
+        <div class="teaching-card">
+          <div class="teaching-badge">📚 Active Teaching Initiative</div>
+          <h3 style="font-size:1.3rem; font-weight:700; margin-bottom:.4rem;">Java → Spring Boot Roadmap</h3>
+          <p style="color:var(--muted); font-size:.88rem; margin-bottom:1.5rem;">
+            Structured curriculum I personally designed and deliver to junior students:
+          </p>
+          <div id="curriculum-list"></div>
+        </div>
+      </div>
+      <div class="col-lg-5 fade-up">
+        <div class="about-card text-center" style="padding:2.5rem;">
+          <div style="font-size:3.5rem; margin-bottom:1rem;">🎓</div>
+          <div style="font-size:2.5rem; font-weight:800; color:var(--accent); font-family:var(--font-mono);">20+</div>
+          <div style="color:var(--muted); font-size:.88rem; margin-bottom:1.5rem;">Students Mentored</div>
+          <p style="font-size:.88rem; color:#94a3b8; line-height:1.6;">
+            Teaching isn't just about sharing knowledge — it's about <strong style="color:var(--text)">deeply understanding</strong> what you build. 
+            Most developers can code; few can explain it clearly.
+          </p>
+          <div style="margin-top:1.5rem; padding-top:1.5rem; border-top:1px solid var(--border);">
+            <div style="font-family:var(--font-mono); font-size:.78rem; color:var(--muted);">this separates me from</div>
+            <div style="font-weight:700; color:var(--accent); margin-top:.3rem;">99% of CS graduates</div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- ═══════════════════════════════ GITHUB ACTIVITY ══ -->
+  <section id="github" class="py-5 border-top border-secondary border-opacity-25 reveal" style="background:#0a0d12;">
+    <div class="container">
+      <div class="d-flex align-items-center gap-3 mb-5">
+        <span class="font-mono text-info" style="font-size:.75rem;">//</span>
+        <h2 class="fw-bold mb-0" style="font-size:2rem;">GitHub <span class="text-info">Activity</span></h2>
+        <div class="flex-grow-1 border-top border-secondary border-opacity-25"></div>
+      </div>
+      <div class="card bg-dark border-secondary border-opacity-50 p-4">
+        <div class="d-flex align-items-center justify-content-between mb-4 flex-wrap gap-3">
+          <div>
+            <div class="fw-bold">@HassanMallah</div>
+            <div class="text-secondary font-mono" style="font-size:.78rem;">github.com/HassanMallah</div>
+          </div>
+          <a href="https://github.com/HassanMallah" target="_blank" class="btn btn-outline-secondary btn-sm font-mono">
+            <i class="bi bi-github me-2"></i>View Profile
+          </a>
+        </div>
+        <!-- Contribution graph placeholder -->
+        <div class="mb-3">
+          <div class="text-secondary font-mono mb-2" style="font-size:.72rem;">Contribution activity (last 52 weeks)</div>
+          <div id="ghGraph" class="d-flex flex-wrap gap-1"></div>
+          <div class="d-flex align-items-center gap-2 mt-2">
+            <span class="text-secondary font-mono" style="font-size:.68rem;">Less</span>
+            <div class="d-flex gap-1">
+              <div class="rounded-1 bg-secondary bg-opacity-25" style="width:11px;height:11px;"></div>
+              <div class="rounded-1 bg-success bg-opacity-25" style="width:11px;height:11px;"></div>
+              <div class="rounded-1 bg-success bg-opacity-50" style="width:11px;height:11px;"></div>
+              <div class="rounded-1 bg-success bg-opacity-75" style="width:11px;height:11px;"></div>
+              <div class="rounded-1 bg-success" style="width:11px;height:11px;"></div>
+            </div>
+            <span class="text-secondary font-mono" style="font-size:.68rem;">More</span>
+          </div>
+        </div>
+        <!-- Repo cards -->
+        <div class="row g-3 mt-2" id="repoCards"></div>
+      </div>
+    </div>
+  </section>
+
+<!-- ═══════════════════════════════ CONTACT ══════════ -->
+  <section id="contact" class="py-5 border-top border-secondary border-opacity-25 reveal bg-black">
+    <div class="container text-center">
+      <div class="d-flex align-items-center gap-3 mb-5">
+        <span class="font-mono text-info" style="font-size:.75rem;">//</span>
+        <h2 class="fw-bold mb-0" style="font-size:2rem;">Let's <span class="text-info">Connect</span></h2>
+        <div class="flex-grow-1 border-top border-secondary border-opacity-25"></div>
+      </div>
+
+      <div class="badge bg-success bg-opacity-10 border border-success border-opacity-25 text-success font-mono px-4 py-2 mb-5" style="font-size:.8rem;">
+        <span class="me-2" style="display:inline-block;width:7px;height:7px;border-radius:50%;background:#198754;animation:blink 1.4s step-end infinite;"></span>
+        Open to internships, freelance &amp; international opportunities
+      </div>
+
+      <div class="row g-3 justify-content-center mb-5">
+        <div class="col-md-4 col-lg-3">
+          <a href="mailto:hassanmallah02@gmail.com" class="card bg-dark border-secondary border-opacity-50 p-4 text-decoration-none d-flex flex-row align-items-center gap-3 card-hover-glow">
+            <div class="rounded-3 d-flex align-items-center justify-content-center flex-shrink-0" style="width:48px;height:48px;background:rgba(234,67,53,.12);">
+              <i class="bi bi-envelope-fill text-danger fs-5"></i>
+            </div>
+            <div class="text-start">
+              <div class="font-mono text-secondary" style="font-size:.7rem;">email</div>
+              <div class="fw-bold text-light" style="font-size:.85rem;">hassanmallah02@gmail.com</div>
+            </div>
+          </a>
+        </div>
+        <div class="col-md-4 col-lg-3">
+          <a href="https://github.com/HassanMallah" target="_blank" class="card bg-dark border-secondary border-opacity-50 p-4 text-decoration-none d-flex flex-row align-items-center gap-3 card-hover-glow">
+            <div class="rounded-3 d-flex align-items-center justify-content-center flex-shrink-0" style="width:48px;height:48px;background:rgba(255,255,255,.07);">
+              <i class="bi bi-github text-light fs-5"></i>
+            </div>
+            <div class="text-start">
+              <div class="font-mono text-secondary" style="font-size:.7rem;">github</div>
+              <div class="fw-bold text-light" style="font-size:.85rem;">@HassanMallah</div>
+            </div>
+          </a>
+        </div>
+        <div class="col-md-4 col-lg-3">
+          <a href="https://www.linkedin.com/in/hassanmallah/" target="_blank" class="card bg-dark border-secondary border-opacity-50 p-4 text-decoration-none d-flex flex-row align-items-center gap-3 card-hover-glow">
+            <div class="rounded-3 d-flex align-items-center justify-content-center flex-shrink-0" style="width:48px;height:48px;background:rgba(0,119,181,.12);">
+              <i class="bi bi-linkedin text-primary fs-5"></i>
+            </div>
+            <div class="text-start">
+              <div class="font-mono text-secondary" style="font-size:.7rem;">linkedin</div>
+              <div class="fw-bold text-light" style="font-size:.85rem;">in/hassanmallah</div>
+            </div>
+          </a>
+        </div>
+      </div>
+
+      <!-- Quick contact form -->
+      <div class="row justify-content-center">
+        <div class="col-lg-6">
+          <div class="card bg-dark border-secondary border-opacity-50 p-4 text-start">
+            <h5 class="fw-bold mb-3 font-mono text-info" style="font-size:.9rem;">// send a message</h5>
+            <form id="contact-form" novalidate>
+              <input type="hidden" name="access_key" value="ba5761b2-4945-422c-a941-f7426d0caa96" />
+              <input type="hidden" name="subject" value="New portfolio message from hassanmallah.github.io" />
+              <input type="hidden" name="from_name" value="Hassan Mallah Portfolio" />
+              <div class="mb-3">
+                <label for="contact-name" class="form-label font-mono text-secondary" style="font-size:.75rem;">name</label>
+                <input
+                  id="contact-name"
+                  name="name"
+                  type="text"
+                  class="form-control bg-black border-secondary text-light font-mono"
+                  placeholder="Your name"
+                  style="font-size:.88rem;"
+                  maxlength="80"
+                  autocomplete="name"
+                  required
+                />
+              </div>
+              <div class="mb-3">
+                <label for="contact-email" class="form-label font-mono text-secondary" style="font-size:.75rem;">email</label>
+                <input
+                  id="contact-email"
+                  name="email"
+                  type="email"
+                  class="form-control bg-black border-secondary text-light font-mono"
+                  placeholder="your@email.com"
+                  style="font-size:.88rem;"
+                  maxlength="120"
+                  autocomplete="email"
+                  required
+                />
+              </div>
+              <div class="mb-3">
+                <label for="contact-message" class="form-label font-mono text-secondary" style="font-size:.75rem;">message</label>
+                <textarea
+                  id="contact-message"
+                  name="message"
+                  class="form-control bg-black border-secondary text-light font-mono"
+                  rows="4"
+                  placeholder="Hi Hassan, I'd like to..."
+                  style="font-size:.88rem;"
+                  maxlength="2000"
+                  required
+                ></textarea>
+              </div>
+              <input
+                type="checkbox"
+                name="botcheck"
+                tabindex="-1"
+                autocomplete="off"
+                aria-hidden="true"
+                style="display:none;"
+              />
+              <div class="h-captcha mb-3" data-captcha="true"></div>
+              <div id="contact-status" class="font-mono mb-3 text-secondary" style="min-height:1.25rem;font-size:.72rem;"></div>
+              <button id="contact-submit" type="submit" class="btn btn-info text-dark fw-bold font-mono w-100">
+                <i class="bi bi-send-fill me-2"></i>send_message()
+              </button>
+            </form>
+          </div>
+        </div>
+      </div>
+    </div>
+  </section>
+
+<!-- ═══════════════════════════════ FOOTER ══════════ -->
+<footer>
+  <div class="container">
+    <p>Built with <span>❤</span> by Hassan Mallah &nbsp;·&nbsp; Hyderabad, Pakistan &nbsp;·&nbsp; Targeting <span>🌍</span></p>
+    <p class="mt-1" style="font-size:.7rem;">© 2025 Hassan Mallah. Open to international opportunities.</p>
+  </div>
+</footer>
+
+<!-- Bootstrap JS -->
+<script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/js/bootstrap.bundle.min.js"></script>
+<script src="https://web3forms.com/client/script.js" async defer></script>
+<!-- Portfolio JS -->
+<script src="main.js"></script>
 </body>
 </html>
