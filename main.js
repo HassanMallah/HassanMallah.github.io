@@ -5,37 +5,27 @@
 
 /* ── DATA ─────────────────────────────────────────── */
 const SKILLS = [
-  { name: 'Java',          icon: 'bi-cup-hot-fill',          pct: 85, color: 'text-info',    badge: 'bg-info bg-opacity-10 border-info' },
-  { name: 'Spring Boot',   icon: 'bi-flower3',               pct: 72, color: 'text-success',  badge: 'bg-success bg-opacity-10 border-success' },
-  { name: 'PostgreSQL',    icon: 'bi-database-fill',         pct: 70, color: 'text-primary',  badge: 'bg-primary bg-opacity-10 border-primary' },
+  { name: 'Java',          icon: 'bi-cup-hot-fill',          pct: 88, color: 'text-info',    badge: 'bg-info bg-opacity-10 border-info' },
+  { name: 'Spring Boot',   icon: 'bi-flower3',               pct: 82, color: 'text-success',  badge: 'bg-success bg-opacity-10 border-success' },
+  { name: 'Spring Security',icon: 'bi-shield-lock-fill',     pct: 75, color: 'text-warning',  badge: 'bg-warning bg-opacity-10 border-warning' },
+  { name: 'API Gateway',    icon: 'bi-signpost-split-fill',  pct: 70, color: 'text-info',     badge: 'bg-info bg-opacity-10 border-info' },
+  { name: 'Microservices', icon: 'bi-layout-split',          pct: 68, color: 'text-secondary',badge: 'bg-secondary bg-opacity-10 border-secondary' },
+  { name: 'PostgreSQL',    icon: 'bi-database-fill',         pct: 75, color: 'text-primary',  badge: 'bg-primary bg-opacity-10 border-primary' },
   { name: 'Node.js',       icon: 'bi-hexagon-fill',          pct: 65, color: 'text-success',  badge: 'bg-success bg-opacity-10 border-success' },
-  { name: 'HTML & CSS',    icon: 'bi-code-slash',            pct: 80, color: 'text-warning',  badge: 'bg-warning bg-opacity-10 border-warning' },
-  { name: 'Bootstrap',     icon: 'bi-bootstrap-fill',        pct: 82, color: 'text-light',    badge: 'bg-secondary bg-opacity-25 border-secondary' },
-  { name: 'Git & GitHub',  icon: 'bi-git',                   pct: 70, color: 'text-danger',   badge: 'bg-danger bg-opacity-10 border-danger' },
-  { name: 'Maven',         icon: 'bi-box-seam-fill',         pct: 65, color: 'text-danger',   badge: 'bg-danger bg-opacity-10 border-danger' },
-  { name: 'JavaScript',    icon: 'bi-lightning-charge-fill', pct: 62, color: 'text-warning',  badge: 'bg-warning bg-opacity-10 border-warning' },
-  { name: 'Microservices', icon: 'bi-layout-split',          pct: 45, color: 'text-secondary',badge: 'bg-secondary bg-opacity-10 border-secondary' },
+  { name: 'Docker',        icon: 'devicon-docker-plain',     pct: 60, color: 'text-info',     badge: 'bg-info bg-opacity-10 border-info' },
+  { name: 'Git & GitHub',  icon: 'bi-git',                   pct: 75, color: 'text-danger',   badge: 'bg-danger bg-opacity-10 border-danger' },
+  { name: 'Maven',         icon: 'bi-box-seam-fill',         pct: 70, color: 'text-danger',   badge: 'bg-danger bg-opacity-10 border-danger' },
   { name: 'OOP Design',    icon: 'bi-diagram-3-fill',        pct: 88, color: 'text-info',     badge: 'bg-info bg-opacity-10 border-info' },
-  { name: 'Docker',        icon: 'devicon-docker-plain',     pct: 55, color: 'text-info',  badge: 'bg-info bg-opacity-10 border-info' },
-];
-
-const CURRICULUM = [
-  { step:'01', text:'Core Java & OOP Fundamentals',   done: true  },
-  { step:'02', text:'Data Structures & Algorithms',   done: true  },
-  { step:'03', text:'JDBC & Database Connectivity',   done: true  },
-  { step:'04', text:'Servlets & Web Basics',          done: true  },
-  { step:'05', text:'Spring Core & Spring MVC',       done: true  },
-  { step:'06', text:'Spring Boot & REST APIs',        done: true },
-  { step:'07', text:'Spring Data JPA / Hibernate',    done: false },
-  { step:'08', text:'Microservices Architecture',     done: false },
+  { name: 'JavaScript',    icon: 'bi-lightning-charge-fill', pct: 62, color: 'text-warning',  badge: 'bg-warning bg-opacity-10 border-warning' },
 ];
 
 const TICKER_ITEMS = [
-  { label: 'khaato-backend',            note: 'Spring Boot microservices — active' },
-  { label: 'Sindh-Uni-Notes',             note: 'Digitizing knowledge into structured platform. — active' },
-  { label: 'Sindh Uni Notes',           note: 'teaching 20+ junior students' },
+  { label: 'khaato-backend',            note: 'Spring Boot microservices & Security — completed' },
+  { label: 'Spring Security',           note: 'JWT authentication, role-based access, CORS' },
+  { label: 'API Gateway',               note: 'Spring Cloud Gateway, routing, filter chains' },
+  { label: 'Sindh-Uni-Notes',           note: 'Digitizing knowledge into structured platform — active' },
   { label: 'Doctor Booking System',     note: 'Node.js full-stack — completed' },
-  { label: 'Learning Microservices',    note: 'structured 8-topic curriculum' },
+  { label: 'Docker & Microservices',    note: 'Containerized deployment & service discovery' },
   { label: 'Open to Germany',           note: 'Master\'s or direct job — 2026' },
   { label: 'PostgreSQL on MacBook M1',  note: 'local dev stack — fully configured' },
 ];
@@ -43,8 +33,9 @@ const TICKER_ITEMS = [
 const TYPING_ROLES = [
   'Java Developer',
   'Spring Boot Engineer',
+  'Spring Security Specialist',
+  'API Gateway Builder',
   'CS Student @ Sindh Uni',
-  'Teaching 20+ Students',
   'Open to Opportunities 🌍',
 ];
 
@@ -54,10 +45,10 @@ const TYPING_ROLES = [
     { t: 0,    html: '<span class="dim">$ </span><span class="prompt">./initialize</span> hassan.portfolio' },
     { t: 400,  html: '> Loading profile...' },
     { t: 750,  html: '> Name:        <span class="hi">Hassan Mallah</span>' },
-    { t: 950,  html: '> Role:        <span class="hi">Java Developer · Spring Boot</span>' },
+    { t: 950,  html: '> Role:        <span class="hi">Java Developer · Spring Security</span>' },
     { t: 1150, html: '> University:  <span class="hi">Sindh University, Hyderabad</span>' },
-    { t: 1550, html: '> Projects:    <span class="hi">3 active</span>' },
-    { t: 1750, html: '> Teaching:    <span class="hi">20+ students</span>' },
+    { t: 1550, html: '> Projects:    <span class="hi">2 completed, 1 active</span>' },
+    { t: 1750, html: '> Security:    <span class="hi">Spring Security &amp; Gateway integrated</span>' },
     { t: 2200, html: '<span class="dim">────────────────────────────────</span>' },
     { t: 2400, html: '> <span class="hi">✓ All systems ready. Launching portfolio...</span>' },
   ];
@@ -82,7 +73,6 @@ const TYPING_ROLES = [
       screen.style.display = 'none';
       document.getElementById('main-nav').classList.add('visible');
       buildSkillsGrid();
-      buildCurriculum();
       buildTicker();
       startTyping();
       buildGitHubGraph();
@@ -135,20 +125,7 @@ function resolveSkillIconClass(icon) {
   return icon.includes(' ') || icon.startsWith('devicon-') ? icon : `bi ${icon}`;
 }
 
-/* ── CURRICULUM ───────────────────────────────────── */
-function buildCurriculum() {
-  const list = document.getElementById('curriculum-list');
-  CURRICULUM.forEach(c => {
-    const div = document.createElement('div');
-    div.className = 'curriculum-item';
-    div.innerHTML = `
-      <span class="curr-num">${c.step}</span>
-      <span class="${c.done ? 'curr-done' : 'curr-pending'}">
-        ${c.done ? '✓' : '○'} ${c.text}
-      </span>`;
-    list.appendChild(div);
-  });
-}
+
 
 /* ── TICKER ───────────────────────────────────────── */
 function buildTicker() {
@@ -246,7 +223,7 @@ function initNavHighlight() {
 /* ── GITHUB GRAPH  (B's exact function) ──────────── */
 const GH_REPOS = [
   { name: 'khaato-backend',  lang: 'Java',  stars: 2, desc: 'Spring Boot microservices backend' },
-  { name: 'sindhuninotes',   lang: 'Java',  stars: 1, desc: 'Teaching resources for CS juniors' },
+  { name: 'sindhuninotes',   lang: 'Java',  stars: 1, desc: 'Open-source notes platform for CS students' },
   { name: 'portfolio',       lang: 'HTML',  stars: 1, desc: 'Personal developer portfolio' },
 ];
 

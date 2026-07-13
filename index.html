@@ -455,57 +455,7 @@
     .status-active { background: var(--green); animation: pulse 1.5s infinite; }
     .status-done   { background: var(--accent); }
 
-    /* ── TEACHING ──────────────────────────────────── */
-    #teaching { background: var(--bg); }
 
-    .teaching-card {
-      background: var(--card);
-      border: 1px solid var(--border);
-      border-radius: 14px;
-      padding: 2.5rem;
-      position: relative;
-      overflow: hidden;
-    }
-    .teaching-card::after {
-      content: '</>';
-      position: absolute;
-      right: 2rem; top: 50%;
-      transform: translateY(-50%);
-      font-size: 6rem;
-      font-family: var(--font-mono);
-      font-weight: 800;
-      color: rgba(0,229,255,.05);
-      pointer-events: none;
-    }
-    .teaching-badge {
-      background: linear-gradient(135deg, var(--accent2), var(--accent));
-      color: #fff;
-      border-radius: 6px;
-      padding: .35rem .9rem;
-      font-family: var(--font-mono);
-      font-size: .75rem;
-      font-weight: 600;
-      display: inline-block;
-      margin-bottom: 1.25rem;
-    }
-    .curriculum-item {
-      display: flex;
-      align-items: center;
-      gap: .75rem;
-      padding: .6rem 0;
-      border-bottom: 1px solid var(--border);
-      font-size: .88rem;
-    }
-    .curriculum-item:last-child { border-bottom: none; }
-    .curr-num {
-      font-family: var(--font-mono);
-      font-size: .72rem;
-      color: var(--accent);
-      width: 24px;
-      flex-shrink: 0;
-    }
-    .curr-done { color: var(--green); }
-    .curr-pending { color: var(--muted); }
 
     /* ── CONTACT ───────────────────────────────────── */
     #contact { background: var(--surface); }
@@ -613,7 +563,6 @@
       <a href="#about"    class="nav-link">about</a>
       <a href="#skills"   class="nav-link">skills</a>
       <a href="#projects" class="nav-link">projects</a>
-      <a href="#teaching" class="nav-link">teaching</a>
       <a href="#github"   class="nav-link">github</a>
       <a href="#contact"  class="nav-link">contact</a>
       <a href="mailto:hassanmallah02@gmail.com" class="nav-link hire-btn ms-2">hire me</a>
@@ -628,7 +577,6 @@
       <a href="#about"    class="nav-link">about</a>
       <a href="#skills"   class="nav-link">skills</a>
       <a href="#projects" class="nav-link">projects</a>
-      <a href="#teaching" class="nav-link">teaching</a>
       <a href="#github"   class="nav-link">github</a>
       <a href="#contact"  class="nav-link">contact</a>
       <a href="mailto:hassanmallah02@gmail.com" class="nav-link hire-btn" style="max-width:120px;">hire me</a>
@@ -651,8 +599,8 @@
           <span class="typing" id="typing-role"></span><span id="typing-cursor">|</span>
         </div>
         <p class="hero-desc fade-up">
-          CS undergraduate at Sindh University building production-grade Java & Spring Boot systems. 
-          I teach, I ship, and I'm targeting <strong style="color:var(--accent)">international opportunities</strong>.
+          CS undergraduate at Sindh University building secure, production-grade microservices with Java, Spring Boot, and Spring Security. 
+          I ship reliable backends and target <strong style="color:var(--accent)">international opportunities</strong>.
         </p>
         <div class="hero-actions fade-up">
           <a href="#projects" class="btn-primary-custom">
@@ -668,12 +616,12 @@
             <div class="stat-label">Semester CS</div>
           </div>
           <div class="stat-item">
-            <div class="stat-num">3<span style="color:var(--green)">+</span></div>
-            <div class="stat-label">Active Projects</div>
+            <div class="stat-num">2<span style="color:var(--green)"></span></div>
+            <div class="stat-label">Completed Projects</div>
           </div>
           <div class="stat-item">
-            <div class="stat-num">20<span style="color:var(--green)">+</span></div>
-            <div class="stat-label">Students Taught</div>
+            <div class="stat-num">1<span style="color:var(--green)"></span></div>
+            <div class="stat-label">Active Project</div>
           </div>
           <div class="stat-item">
             <div class="stat-num">🌍</div>
@@ -698,7 +646,7 @@
         <div class="section-label">// about</div>
         <h2 class="section-title">Who Am <span class="accent">I?</span></h2>
         <p class="section-sub">
-          I don't just study CS — I build real systems, teach others, and contribute to 
+          I don't just study CS — I build real systems, design secure APIs, and contribute to 
           production backends. My stack is Java + Spring Boot, and I'm serious about going global.
         </p>
         <div class="about-card">
@@ -707,9 +655,9 @@
             <div class="info-row"><span class="info-key">university</span><span class="info-val">Sindh University, Hyderabad</span></div>
             <div class="info-row"><span class="info-key">semester</span><span class="info-val">5th — Computer Science</span></div>
             <div class="info-row"><span class="info-key">location</span><span class="info-val">Hyderabad, Sindh, Pakistan</span></div>
-            <div class="info-row"><span class="info-key">primary stack</span><span class="info-val">Java · Spring Boot · PostgreSQL</span></div>
-            <div class="info-row"><span class="info-key">secondary</span><span class="info-val">Node.js · HTML/CSS · Bootstrap</span></div>
-            <div class="info-row"><span class="info-key">tools</span><span class="info-val">IntelliJ · Git · Maven · Linear</span></div>
+            <div class="info-row"><span class="info-key">primary stack</span><span class="info-val">Java · Spring Boot · Spring Security</span></div>
+            <div class="info-row"><span class="info-key">secondary</span><span class="info-val">Node.js · API Gateway · PostgreSQL</span></div>
+            <div class="info-row"><span class="info-key">tools</span><span class="info-val">IntelliJ · Git · Maven · Docker</span></div>
             <div class="info-row"><span class="info-key">email</span><span class="info-val">hassanmallah02@gmail.com</span></div>
           </div>
           <div class="goal-badge">
@@ -723,21 +671,21 @@
             <div class="about-card text-center">
               <div style="font-size:2.5rem; margin-bottom:.75rem;">🏗️</div>
               <div style="font-weight:700; margin-bottom:.4rem;">Builder Mindset</div>
-              <div style="font-size:.82rem; color:var(--muted);">3 active projects in parallel — never just studying theory</div>
+              <div style="font-size:.82rem; color:var(--muted);">Multiple projects built — never just studying theory</div>
             </div>
           </div>
           <div class="col-6">
             <div class="about-card text-center">
-              <div style="font-size:2.5rem; margin-bottom:.75rem;">🎓</div>
-              <div style="font-weight:700; margin-bottom:.4rem;">Teaching Others</div>
-              <div style="font-size:.82rem; color:var(--muted);">Running Sindh Uni Notes — Java to Spring Boot curriculum</div>
+              <div style="font-size:2.5rem; margin-bottom:.75rem;">🛡️</div>
+              <div style="font-weight:700; margin-bottom:.4rem;">Security &amp; Gateway</div>
+              <div style="font-size:.82rem; color:var(--muted);">Implementing Spring Security &amp; API Gateways for secure microservices</div>
             </div>
           </div>
           <div class="col-6">
             <div class="about-card text-center">
               <div style="font-size:2.5rem; margin-bottom:.75rem;">🤝</div>
               <div style="font-weight:700; margin-bottom:.4rem;">Team Player</div>
-              <div style="font-size:.82rem; color:var(--muted);">Collaborating on khaato-backend with family team</div>
+              <div style="font-size:.82rem; color:var(--muted);">Collaborating on production backends with developer teams</div>
             </div>
           </div>
           <div class="col-6">
@@ -782,13 +730,13 @@
           </div>
           <div class="project-title">khaato-backend</div>
           <div class="project-desc">
-            Microservices backend built with Spring Boot. Contributing as a team collaborator
-            alongside my uncle and cousins — real production codebase with Maven, IntelliJ, and PostgreSQL.
+            Production-grade microservices backend built with Spring Boot, Spring Security, and API Gateway. Collaborated 
+            with a team using Maven, IntelliJ, and PostgreSQL to deliver a secure, robust system.
           </div>
           <div class="d-flex align-items-center justify-content-between">
             <div class="project-status">
-              <span class="status-dot status-active"></span>
-              <span style="color:var(--green)">Active Development</span>
+              <span class="status-dot status-done"></span>
+              <span style="color:var(--accent)">Completed</span>
             </div>
             <a href="https://github.com/HassanMallah" target="_blank" class="btn-ghost" style="padding:.35rem .85rem; font-size:.75rem;">
               <i class="bi bi-github"></i> GitHub
@@ -807,7 +755,7 @@
           <div class="project-title">Sindh-Uni-Notes</div>
           <div class="project-desc">
             Digitizing university knowledge into a fully structured notes platform. Covers Java, Spring Boot, 
-            and backend development — taught to real junior students at Sindh University.
+            and backend development — built as a structured, open-source resource for Sindh University students.
           </div>
           <div class="d-flex align-items-center justify-content-between">
             <div class="project-status">
@@ -849,45 +797,7 @@
   </div>
 </section>
 
-<!-- ═══════════════════════════════ TEACHING ════════ -->
-<section id="teaching">
-  <div class="container">
-    <div class="section-label fade-up">// teaching</div>
-    <h2 class="section-title fade-up">Sindh Uni <span class="accent">Notes</span></h2>
-    <p class="section-sub fade-up">
-      I run an in-person teaching initiative for junior CS students at Sindh University. 
-      If you can teach it, you truly understand it.
-    </p>
 
-    <div class="row g-4 align-items-start">
-      <div class="col-lg-7 fade-up">
-        <div class="teaching-card">
-          <div class="teaching-badge">📚 Active Teaching Initiative</div>
-          <h3 style="font-size:1.3rem; font-weight:700; margin-bottom:.4rem;">Java → Spring Boot Roadmap</h3>
-          <p style="color:var(--muted); font-size:.88rem; margin-bottom:1.5rem;">
-            Structured curriculum I personally designed and deliver to junior students:
-          </p>
-          <div id="curriculum-list"></div>
-        </div>
-      </div>
-      <div class="col-lg-5 fade-up">
-        <div class="about-card text-center" style="padding:2.5rem;">
-          <div style="font-size:3.5rem; margin-bottom:1rem;">🎓</div>
-          <div style="font-size:2.5rem; font-weight:800; color:var(--accent); font-family:var(--font-mono);">20+</div>
-          <div style="color:var(--muted); font-size:.88rem; margin-bottom:1.5rem;">Students Mentored</div>
-          <p style="font-size:.88rem; color:#94a3b8; line-height:1.6;">
-            Teaching isn't just about sharing knowledge — it's about <strong style="color:var(--text)">deeply understanding</strong> what you build. 
-            Most developers can code; few can explain it clearly.
-          </p>
-          <div style="margin-top:1.5rem; padding-top:1.5rem; border-top:1px solid var(--border);">
-            <div style="font-family:var(--font-mono); font-size:.78rem; color:var(--muted);">this separates me from</div>
-            <div style="font-weight:700; color:var(--accent); margin-top:.3rem;">99% of CS graduates</div>
-          </div>
-        </div>
-      </div>
-    </div>
-  </div>
-</section>
 
 <!-- ═══════════════════════════════ GITHUB ACTIVITY ══ -->
   <section id="github" class="py-5 border-top border-secondary border-opacity-25 reveal" style="background:#0a0d12;">
